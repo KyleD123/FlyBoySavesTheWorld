@@ -33,31 +33,38 @@ public class GameManager : MonoBehaviour
     {
         while (EnemyCount < MaxEnemyCount)
         {
-            /*            if(Random.Range(0, 100) > 50)
-                        {
-                            SpawnFlyingEnemy();
-                        }
-                        else
-                        {
-                            SpawnGroundEnemy();
-                        }*/
-            SpawnGroundEnemy();
-            yield return new WaitForSeconds(2.5f);
+            if (Random.Range(0, 100) > 50)
+            {
+                SpawnFlyingEnemy();
+            }
+            else
+            {
+                SpawnGroundEnemy();
+            }
+            yield return new WaitForSeconds(2.0f);
         }
 
     }
 
     public void SpawnFlyingEnemy()
     {
-        //Vector2 position = new Vector2(2.6f, Random.Range(-0.4f, 0.93f));
-        Vector2 position = new Vector2(2.6f, Player.transform.position.y);
-        Instantiate(FlyingEnemy.gameObject, position, Quaternion.identity);
+        if(Player != null)
+        {
+            //Vector2 position = new Vector2(2.6f, Random.Range(-0.4f, 0.93f));
+/*            if (Player.transform.position.y <= -0.74) { 
+            }*/
+            Vector2 position = new Vector2(2.6f, Player.transform.position.y);
+            Instantiate(FlyingEnemy.gameObject, position, Quaternion.identity);
+        }
     }
 
     public void SpawnGroundEnemy()
     {
-        Vector2 position = new Vector2(2.6f, -0.74f);
-        Instantiate(GroundEnemy.gameObject, position, Quaternion.identity);
+        if(Player != null)
+        {
+            Vector2 position = new Vector2(2.6f, -0.74f);
+            Instantiate(GroundEnemy.gameObject, position, Quaternion.identity);
+        }
     }
 
 }

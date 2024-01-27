@@ -12,28 +12,38 @@ public class FrogJump : MonoBehaviour
     public bool OnGround = true;
     public bool StartJump = true;
 
+
+
     // Start is called before the first frame update
     void Start()
     {
         rb = this.GetComponent<Rigidbody2D>();
         e = this.GetComponent<Enemy>();
         player = GameObject.Find("Player");
+
+        StartCoroutine(JumpWhenInRange());
     }
 
     // Update is called once per frame
     void FixedUpdate()
     {
-        if (Vector2.Distance(this.transform.position, player.transform.position) < 2.0f && StartJump)
+
+    }
+
+    IEnumerator JumpWhenInRange()
+    {
+        while (true)
         {
-            e.speed = 25;
-            Debug.Log("Jump");
-            rb.AddForce(new Vector2(rb.velocity.x, JumpPower), ForceMode2D.Force);
-            if (this.transform.position.y > 0.4)
+            if (Vector2.Distance(this.transform.position, player.transform.position) < 1.5f)
             {
-                Debug.Log(this.transform.position);
-                StartJump = false;
-                e.speed = 200;
+                rb.AddForce(new Vector2(0, JumpPower * Random.Range(0.2f, 1f)), ForceMode2D.Impulse);
+                yield break;
             }
+            else
+            {
+                yield return null;
+            }
+
         }
     }
 
