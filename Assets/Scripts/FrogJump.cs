@@ -7,7 +7,6 @@ public class FrogJump : MonoBehaviour
     public float JumpPower = 35;
     private Rigidbody2D rb;
     private GameObject player;
-    private Enemy e;
 
     public bool OnGround = true;
     public bool StartJump = true;
@@ -19,17 +18,10 @@ public class FrogJump : MonoBehaviour
     void Start()
     {
         rb = this.GetComponent<Rigidbody2D>();
-        e = this.GetComponent<Enemy>();
         player = GameObject.Find("GameManager").GetComponent<GameManager>().Player;
         anime = this.GetComponentInChildren<Animator>();
         anime.Play("EnemyFrog_Idle");
         StartCoroutine(JumpWhenInRange());
-    }
-
-    // Update is called once per frame
-    void FixedUpdate()
-    {
-
     }
 
     IEnumerator JumpWhenInRange()
