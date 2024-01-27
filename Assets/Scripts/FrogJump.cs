@@ -12,6 +12,7 @@ public class FrogJump : MonoBehaviour
     public bool OnGround = true;
     public bool StartJump = true;
 
+    Animator anime;
 
 
     // Start is called before the first frame update
@@ -19,8 +20,9 @@ public class FrogJump : MonoBehaviour
     {
         rb = this.GetComponent<Rigidbody2D>();
         e = this.GetComponent<Enemy>();
-        player = GameObject.Find("Player");
-
+        player = GameObject.Find("GameManager").GetComponent<GameManager>().Player;
+        anime = this.GetComponentInChildren<Animator>();
+        anime.Play("EnemyFrog_Idle");
         StartCoroutine(JumpWhenInRange());
     }
 
@@ -34,9 +36,12 @@ public class FrogJump : MonoBehaviour
     {
         while (true)
         {
+            if (player == null) yield break;
             if (Vector2.Distance(this.transform.position, player.transform.position) < 1.5f)
             {
-                rb.AddForce(new Vector2(0, JumpPower * Random.Range(0.5f, 1.5f)), ForceMode2D.Impulse);
+                rb.AddForce(new Vector2(0, JumpPower * Random.Range(0.4f, 1.1f)), ForceMode2D.Impulse);
+                OnGround = false;
+                anime.SetBool("OnGround", OnGround);
                 yield break;
             }
             else
@@ -53,6 +58,7 @@ public class FrogJump : MonoBehaviour
         if(collision.transform.tag == "Ground")
         {
             OnGround = true;
+            anime.SetBool("OnGround", OnGround);
         }
     }
 

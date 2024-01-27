@@ -6,7 +6,10 @@ public class GameManager : MonoBehaviour
 {
     public Enemy FlyingEnemy;
     public Enemy GroundEnemy;
-    private GameObject Player;
+    public GameObject PlayerPrefab;
+    [HideInInspector]
+    public GameObject Player;
+    public GameObject collectable;
     private Coroutine spawnCo;
     private int MaxEnemyCount = 5;
     private int EnemyCount { 
@@ -19,7 +22,7 @@ public class GameManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        Player = GameObject.Find("Player");
+        Player = SpawnPlayer();
         spawnCo = StartCoroutine(Spawner());
     }
 
@@ -36,6 +39,8 @@ public class GameManager : MonoBehaviour
             if (Random.Range(0, 100) > 50)
             {
                 SpawnFlyingEnemy();
+                yield return new WaitForSeconds(1.0f);
+                SpawnCollectable();
             }
             else
             {
@@ -44,6 +49,15 @@ public class GameManager : MonoBehaviour
             yield return new WaitForSeconds(2.0f);
         }
 
+    }
+
+    public void SpawnCollectable()
+    {
+        if(Player != null)
+        {
+            Vector2 position = new Vector2(2.6f, Random.Range(-0.4f, 0.96f));
+            Instantiate(collectable, position, Quaternion.identity);
+        }
     }
 
     public void SpawnFlyingEnemy()
@@ -62,6 +76,12 @@ public class GameManager : MonoBehaviour
             Vector2 position = new Vector2(2.6f, -0.635f);
             Instantiate(GroundEnemy.gameObject, position, Quaternion.identity);
         }
+    }
+
+    public GameObject SpawnPlayer()
+    {
+        Vector2 pos = new Vector2(-2f, 0.151f);
+        return Instantiate(PlayerPrefab, pos, Quaternion.identity);
     }
 
 }
