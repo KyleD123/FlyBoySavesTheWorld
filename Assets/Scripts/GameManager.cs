@@ -6,29 +6,58 @@ public class GameManager : MonoBehaviour
 {
     public Enemy FlyingEnemy;
     public Enemy GroundEnemy;
+    private GameObject Player;
+    private Coroutine spawnCo;
+    private int MaxEnemyCount = 5;
+    private int EnemyCount { 
+        get
+        {
+            return FindObjectsOfType<Enemy>().Length;
+        } 
+    }
 
     // Start is called before the first frame update
     void Start()
     {
-        
+        Player = GameObject.Find("Player");
+        spawnCo = StartCoroutine(Spawner());
     }
 
     // Update is called once per frame
     void Update()
     {
-        int countOfEnemies = FindObjectsOfType<Enemy>().Length;
-        if(countOfEnemies < 3)
+       
+    }
+
+    IEnumerator Spawner()
+    {
+        while (EnemyCount < MaxEnemyCount)
         {
-            SpawnEnemy();
+            /*            if(Random.Range(0, 100) > 50)
+                        {
+                            SpawnFlyingEnemy();
+                        }
+                        else
+                        {
+                            SpawnGroundEnemy();
+                        }*/
+            SpawnGroundEnemy();
+            yield return new WaitForSeconds(2.5f);
         }
 
     }
 
-
-    public void SpawnEnemy()
+    public void SpawnFlyingEnemy()
     {
-        Vector2 position = new Vector2(11.5f, Random.Range(-5.0f, 5.0f));
+        //Vector2 position = new Vector2(2.6f, Random.Range(-0.4f, 0.93f));
+        Vector2 position = new Vector2(2.6f, Player.transform.position.y);
         Instantiate(FlyingEnemy.gameObject, position, Quaternion.identity);
+    }
+
+    public void SpawnGroundEnemy()
+    {
+        Vector2 position = new Vector2(2.6f, -0.74f);
+        Instantiate(GroundEnemy.gameObject, position, Quaternion.identity);
     }
 
 }
