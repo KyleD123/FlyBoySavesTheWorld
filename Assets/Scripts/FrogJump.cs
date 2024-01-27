@@ -36,7 +36,7 @@ public class FrogJump : MonoBehaviour
         {
             if (Vector2.Distance(this.transform.position, player.transform.position) < 1.5f)
             {
-                rb.AddForce(new Vector2(0, JumpPower * Random.Range(0.2f, 1f)), ForceMode2D.Impulse);
+                rb.AddForce(new Vector2(0, JumpPower * Random.Range(0.5f, 1.5f)), ForceMode2D.Impulse);
                 yield break;
             }
             else

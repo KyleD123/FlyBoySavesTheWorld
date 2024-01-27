@@ -50,9 +50,6 @@ public class GameManager : MonoBehaviour
     {
         if(Player != null)
         {
-            //Vector2 position = new Vector2(2.6f, Random.Range(-0.4f, 0.93f));
-/*            if (Player.transform.position.y <= -0.74) { 
-            }*/
             Vector2 position = new Vector2(2.6f, Player.transform.position.y);
             Instantiate(FlyingEnemy.gameObject, position, Quaternion.identity);
         }
@@ -62,7 +59,7 @@ public class GameManager : MonoBehaviour
     {
         if(Player != null)
         {
-            Vector2 position = new Vector2(2.6f, -0.74f);
+            Vector2 position = new Vector2(2.6f, -0.635f);
             Instantiate(GroundEnemy.gameObject, position, Quaternion.identity);
         }
     }
