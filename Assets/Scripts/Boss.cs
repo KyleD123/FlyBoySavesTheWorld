@@ -49,6 +49,7 @@ public class Boss : MonoBehaviour
         hand.GetComponent<Rigidbody2D>().gravityScale = 1f;
         yield return new WaitForSeconds(2);
         hand.GetComponent<Rigidbody2D>().gravityScale = -1f;
+        yield return new WaitForSeconds(5);
         yield return StartCoroutine(Slap2());
     }
 
@@ -60,6 +61,7 @@ public class Boss : MonoBehaviour
         hand.GetComponent<Rigidbody2D>().gravityScale = 1f;
         yield return new WaitForSeconds(2);
         hand.GetComponent<Rigidbody2D>().gravityScale = -1f;
+        yield return new WaitForSeconds(5);
         yield return StartCoroutine(Slap1());
     }
 
