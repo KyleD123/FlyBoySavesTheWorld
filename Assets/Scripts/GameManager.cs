@@ -56,7 +56,9 @@ public class GameManager : MonoBehaviour
                 if(FindObjectOfType<Boss>() != null)
                 {
                     GameObject boss = FindObjectOfType<Boss>().gameObject;
+                    GameObject hand = FindObjectOfType<Hand>().gameObject;
                     Destroy(boss);
+                    Destroy(hand);
                     BossBattle = false;
                 }
             }
@@ -99,7 +101,8 @@ public class GameManager : MonoBehaviour
     {
         if(Player != null)
         {
-            Vector2 position = new Vector2(2.6f, Random.Range(-0.4f, 0.96f));
+            //Vector2 position = new Vector2(2.6f, Random.Range(-0.4f, 0.96f));
+            Vector2 position = new Vector2(2.6f, -0.635f);
             Instantiate(collectable, position, Quaternion.identity);
         }
     }
