@@ -37,8 +37,6 @@ public class GameManager : MonoBehaviour
     void Start()
     {
         Player = SpawnPlayer();
-
-
         spawnCo = StartCoroutine(Spawner());
         //SpawnBoss();
     }

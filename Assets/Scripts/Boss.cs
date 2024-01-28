@@ -37,7 +37,7 @@ public class Boss : MonoBehaviour
 
     IEnumerator StartFight()
     {
-        yield return new WaitForSeconds(3);
+        yield return new WaitForSeconds(1.5f);
         yield return StartCoroutine(Slap1());
     }
 
