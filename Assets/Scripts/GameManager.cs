@@ -40,6 +40,7 @@ public class GameManager : MonoBehaviour
 
 
         spawnCo = StartCoroutine(Spawner());
+        //SpawnBoss();
     }
 
 
