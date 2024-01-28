@@ -136,7 +136,7 @@ public class GameManager : MonoBehaviour
     public void SpawnBoss()
     {
         BossSpawned = true;
-        Vector2 pos = new Vector2(2.6f, -0.655f);
+        Vector2 pos = new Vector2(2.6f, 0.169f);
         Instantiate(BossPrefab, pos, Quaternion.identity);
     }
 
