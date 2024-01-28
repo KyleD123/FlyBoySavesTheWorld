@@ -13,7 +13,7 @@ public class GameManager : MonoBehaviour
     public GameObject Player;
     public GameObject collectable;
     private Coroutine spawnCo;
-    private int MaxEnemyCount = 5;
+    private int MaxEnemyCount = 6;
 
     [HideInInspector]
     public bool BossBattle = false;
@@ -77,7 +77,6 @@ public class GameManager : MonoBehaviour
     }
 
 
-
     IEnumerator Spawner()
     {
         while (EnemyCount < MaxEnemyCount)
@@ -92,7 +91,7 @@ public class GameManager : MonoBehaviour
             {
                 SpawnGroundEnemy();
             }
-            yield return new WaitForSeconds(2.0f);
+            yield return new WaitForSeconds(1.5f);
         }
 
     }
@@ -111,8 +110,11 @@ public class GameManager : MonoBehaviour
     {
         if(Player != null)
         {
-            Vector2 position = new Vector2(2.6f, Player.transform.position.y);
-            Instantiate(FlyingEnemy.gameObject, position, Quaternion.identity);
+            Vector2 position = new Vector2(2.6f, Random.Range(-0.4f, 0.96f));
+            //Vector2 position = new Vector2(2.6f, Player.transform.position.y);
+            GameObject bird = Instantiate(FlyingEnemy.gameObject, position, Quaternion.identity);
+            float rnd = Random.Range(1.0f, 1.75f);
+            bird.transform.localScale = new Vector3(rnd, rnd, rnd);
         }
     }
 

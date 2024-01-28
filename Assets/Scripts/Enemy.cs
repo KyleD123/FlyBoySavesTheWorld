@@ -11,7 +11,6 @@ public class Enemy : MonoBehaviour
     private void Start()
     {
         rb = this.GetComponent<Rigidbody2D>();
-        
     }
 
     void FixedUpdate()
