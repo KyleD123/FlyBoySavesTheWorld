@@ -21,6 +21,9 @@ public class GameManager : MonoBehaviour
     [HideInInspector]
     public bool BossSpawned = false;
 
+    [HideInInspector]
+    public bool Winner = false;
+
     private float TimeSpent = 0;
 
     private int EnemyCount { 
@@ -63,6 +66,9 @@ public class GameManager : MonoBehaviour
                     Destroy(boss);
                     Destroy(hand);
                     BossBattle = false;
+                    Winner = true;
+                    Debug.Log("You Win!");
+                    SceneManager.LoadScene("WinnerScreen");
                 }
             }
 

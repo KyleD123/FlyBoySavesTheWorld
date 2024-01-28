@@ -25,14 +25,12 @@ public class Boss : MonoBehaviour
     {
         if(this.transform.position.x > 1.355f && !inPosition)
         {
-            Debug.Log("Moving Boss Speed = " + speed);
             rb.AddForce(Vector2.left * speed * Time.deltaTime);
         }
         else
         {
             inPosition = true;
             this.transform.position = new Vector2(1.355f, this.transform.position.y);
-            Debug.Log("Boss staying");
         }
     }
 
@@ -50,6 +48,7 @@ public class Boss : MonoBehaviour
         yield return new WaitForSeconds(3);
         hand.GetComponent<Rigidbody2D>().gravityScale = 1f;
         yield return new WaitForSeconds(2);
+        hand.GetComponent<Rigidbody2D>().gravityScale = -1f;
         yield return StartCoroutine(Slap2());
     }
 
@@ -60,6 +59,7 @@ public class Boss : MonoBehaviour
         yield return new WaitForSeconds(3);
         hand.GetComponent<Rigidbody2D>().gravityScale = 1f;
         yield return new WaitForSeconds(2);
+        hand.GetComponent<Rigidbody2D>().gravityScale = -1f;
         yield return StartCoroutine(Slap1());
     }
 
