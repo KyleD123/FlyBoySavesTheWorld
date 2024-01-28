@@ -17,7 +17,14 @@ public class PlayerMovement : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
-        this.rb.velocity = move * speed * Time.deltaTime;
+        if(move.x == -1)
+        {
+            this.rb.velocity = move * (speed/2) * Time.deltaTime;
+        }
+        else
+        {
+            this.rb.velocity = move * speed * Time.deltaTime;
+        }
     }
 
     // Update is called once per frame

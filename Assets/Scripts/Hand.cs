@@ -10,7 +10,7 @@ public class Hand : MonoBehaviour
     private void Start()
     {
         rb = this.GetComponent<Rigidbody2D>();
-        this.transform.position = new Vector2(-1.57f, 2f);
+        this.transform.position = new Vector2(-1.57f, 2.5f);
         rb.gravityScale = 0;
         audioSrc = this.GetComponent<AudioSource>();
     }

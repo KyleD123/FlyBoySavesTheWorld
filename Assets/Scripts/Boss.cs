@@ -46,7 +46,7 @@ public class Boss : MonoBehaviour
     IEnumerator Slap1()
     {
         hand.GetComponent<Rigidbody2D>().gravityScale = 0;
-        hand.transform.position = new Vector2(-1.57f, 2f);
+        hand.transform.position = new Vector2(-1.57f, 2.5f);
         yield return new WaitForSeconds(3);
         hand.GetComponent<Rigidbody2D>().gravityScale = 1f;
         yield return new WaitForSeconds(2);
@@ -56,7 +56,7 @@ public class Boss : MonoBehaviour
     IEnumerator Slap2()
     {
         hand.GetComponent<Rigidbody2D>().gravityScale = 0;
-        hand.transform.position = new Vector2(-0.2f, 2f);
+        hand.transform.position = new Vector2(-0.2f, 2.5f);
         yield return new WaitForSeconds(3);
         hand.GetComponent<Rigidbody2D>().gravityScale = 1f;
         yield return new WaitForSeconds(2);
