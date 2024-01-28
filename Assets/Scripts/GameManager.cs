@@ -8,11 +8,21 @@ public class GameManager : MonoBehaviour
     public Enemy FlyingEnemy;
     public Enemy GroundEnemy;
     public GameObject PlayerPrefab;
+    public GameObject BossPrefab;
     [HideInInspector]
     public GameObject Player;
     public GameObject collectable;
     private Coroutine spawnCo;
     private int MaxEnemyCount = 5;
+
+    [HideInInspector]
+    public bool BossBattle = false;
+
+    [HideInInspector]
+    public bool BossSpawned = false;
+
+    private float TimeSpent = 0;
+
     private int EnemyCount { 
         get
         {
@@ -34,7 +44,37 @@ public class GameManager : MonoBehaviour
         {
             SceneManager.LoadScene("EndScreen");
         }
+
+        if(TimeSpent < 30)
+        {
+            TimeSpent += Time.deltaTime;
+        }
+        else
+        {
+            if (BossBattle)
+            {
+                if(FindObjectOfType<Boss>() != null)
+                {
+                    GameObject boss = FindObjectOfType<Boss>().gameObject;
+                    Destroy(boss);
+                    BossBattle = false;
+                }
+            }
+
+            if (spawnCo != null)
+            {
+                StopCoroutine(spawnCo);
+                BossBattle = true;
+                if(!BossSpawned)
+                {
+                    SpawnBoss();
+                    TimeSpent = 0;
+                }
+            }
+        }
     }
+
+
 
     IEnumerator Spawner()
     {
@@ -86,6 +126,13 @@ public class GameManager : MonoBehaviour
     {
         Vector2 pos = new Vector2(-2f, 0.151f);
         return Instantiate(PlayerPrefab, pos, Quaternion.identity);
+    }
+
+    public void SpawnBoss()
+    {
+        BossSpawned = true;
+        Vector2 pos = new Vector2(2.6f, -0.655f);
+        Instantiate(BossPrefab, pos, Quaternion.identity);
     }
 
 }

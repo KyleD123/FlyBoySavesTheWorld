@@ -29,7 +29,7 @@ public class FrogJump : MonoBehaviour
         while (true)
         {
             if (player == null) yield break;
-            if (Vector2.Distance(this.transform.position, player.transform.position) < 1.5f)
+            if (Vector2.Distance(this.transform.position, player.transform.position) < 1.75f)
             {
                 rb.AddForce(new Vector2(0, JumpPower * Random.Range(0.4f, 1.1f)), ForceMode2D.Impulse);
                 OnGround = false;
@@ -50,7 +50,8 @@ public class FrogJump : MonoBehaviour
         if(collision.transform.tag == "Ground")
         {
             OnGround = true;
-            anime.SetBool("OnGround", OnGround);
+            if(anime != null)
+                anime.SetBool("OnGround", OnGround);
         }
     }
 
