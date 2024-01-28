@@ -10,31 +10,43 @@ public class Boss : MonoBehaviour
 
     public GameObject hand;
 
+    public bool inPosition = false;
+
     // Start is called before the first frame update
     void Start()
     {
         this.hand = GameObject.Find("Hand");
         rb = this.GetComponent<Rigidbody2D>();
-        StartCoroutine(Slap1());
+        StartCoroutine(StartFight());
     }
 
 
     void FixedUpdate()
     {
-        if(this.transform.position.x > 1.6f)
+        if(this.transform.position.x > 1.355f && !inPosition)
         {
+            Debug.Log("Moving Boss Speed = " + speed);
             rb.AddForce(Vector2.left * speed * Time.deltaTime);
         }
         else
         {
-            this.transform.position = new Vector2(1.6f, this.transform.position.y);
+            inPosition = true;
+            this.transform.position = new Vector2(1.355f, this.transform.position.y);
+            Debug.Log("Boss staying");
         }
+    }
+
+
+    IEnumerator StartFight()
+    {
+        yield return new WaitForSeconds(3);
+        yield return StartCoroutine(Slap1());
     }
 
     IEnumerator Slap1()
     {
         hand.GetComponent<Rigidbody2D>().gravityScale = 0;
-        hand.transform.position = new Vector2(-1.57f, 1.78f);
+        hand.transform.position = new Vector2(-1.57f, 2f);
         yield return new WaitForSeconds(3);
         hand.GetComponent<Rigidbody2D>().gravityScale = 1f;
         yield return new WaitForSeconds(2);
@@ -44,7 +56,7 @@ public class Boss : MonoBehaviour
     IEnumerator Slap2()
     {
         hand.GetComponent<Rigidbody2D>().gravityScale = 0;
-        hand.transform.position = new Vector2(-0.2f, 1.78f);
+        hand.transform.position = new Vector2(-0.2f, 2f);
         yield return new WaitForSeconds(3);
         hand.GetComponent<Rigidbody2D>().gravityScale = 1f;
         yield return new WaitForSeconds(2);

@@ -34,8 +34,11 @@ public class GameManager : MonoBehaviour
     void Start()
     {
         Player = SpawnPlayer();
+
+
         spawnCo = StartCoroutine(Spawner());
     }
+
 
     // Update is called once per frame
     void Update()
@@ -79,6 +82,7 @@ public class GameManager : MonoBehaviour
 
     IEnumerator Spawner()
     {
+        yield return new WaitForSeconds(5);
         while (EnemyCount < MaxEnemyCount)
         {
             if (Random.Range(0, 100) > 50)
@@ -136,7 +140,7 @@ public class GameManager : MonoBehaviour
     public void SpawnBoss()
     {
         BossSpawned = true;
-        Vector2 pos = new Vector2(2.6f, 0.169f);
+        Vector2 pos = new Vector2(2.6f, 0.17f);
         Instantiate(BossPrefab, pos, Quaternion.identity);
     }
 

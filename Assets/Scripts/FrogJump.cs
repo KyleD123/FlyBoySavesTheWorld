@@ -13,6 +13,8 @@ public class FrogJump : MonoBehaviour
 
     Animator anime;
 
+    private AudioSource audioSource;
+
 
     // Start is called before the first frame update
     void Start()
@@ -21,6 +23,7 @@ public class FrogJump : MonoBehaviour
         player = GameObject.Find("GameManager").GetComponent<GameManager>().Player;
         anime = this.GetComponentInChildren<Animator>();
         anime.Play("EnemyFrog_Idle");
+        audioSource = this.GetComponent<AudioSource>();
         StartCoroutine(JumpWhenInRange());
     }
 
@@ -34,6 +37,7 @@ public class FrogJump : MonoBehaviour
                 rb.AddForce(new Vector2(0, JumpPower * Random.Range(0.4f, 1.1f)), ForceMode2D.Impulse);
                 OnGround = false;
                 anime.SetBool("OnGround", OnGround);
+                audioSource.Play();
                 yield break;
             }
             else
