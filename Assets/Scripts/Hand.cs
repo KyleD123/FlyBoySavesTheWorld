@@ -9,16 +9,8 @@ public class Hand : MonoBehaviour
     private void Start()
     {
         rb = this.GetComponent<Rigidbody2D>();
-    }
-
-    private void Update()
-    {
-        GameManager gm = GameObject.Find("GameManager").GetComponent<GameManager>();
-        if (!gm.BossBattle)
-        {
-            this.transform.position = new Vector2(-1.57f, 1.78f);
-            rb.gravityScale = 0;
-        }
+        this.transform.position = new Vector2(-1.57f, 1.78f);
+        rb.gravityScale = 0;
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
