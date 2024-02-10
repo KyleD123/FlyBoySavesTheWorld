@@ -27,6 +27,8 @@ public class GameManager : MonoBehaviour
 
     private float TimeSpent = 0;
 
+    public int TimeLimitPerSection = 30;
+
     private int EnemyCount { 
         get
         {
@@ -51,7 +53,7 @@ public class GameManager : MonoBehaviour
             SceneManager.LoadScene("EndScreen");
         }
 
-        if(TimeSpent < 30)
+        if(TimeSpent < TimeLimitPerSection)
         {
             TimeSpent += Time.deltaTime;
         }
@@ -94,8 +96,6 @@ public class GameManager : MonoBehaviour
             if (Random.Range(0, 100) > 50)
             {
                 SpawnFlyingEnemy();
-                yield return new WaitForSeconds(1.0f);
-                SpawnCollectable();
             }
             else
             {
@@ -106,13 +106,21 @@ public class GameManager : MonoBehaviour
 
     }
 
-    public void SpawnCollectable()
+    public void SpawnCollectable(Vector2 pos)
     {
         if(Player != null)
         {
             //Vector2 position = new Vector2(2.6f, Random.Range(-0.4f, 0.96f));
-            Vector2 position = new Vector2(2.6f, -0.635f);
-            Instantiate(collectable, position, Quaternion.identity);
+            Instantiate(collectable, pos, Quaternion.identity);
+        }
+    }
+
+    public void SpawnDifferentSizedCollectable(Vector2 pos, float rndScale)
+    {
+        if(Player != null)
+        {
+            GameObject poop = Instantiate(collectable, pos, Quaternion.identity);
+            poop.transform.localScale = new Vector3(rndScale, rndScale, rndScale);
         }
     }
 
@@ -120,11 +128,12 @@ public class GameManager : MonoBehaviour
     {
         if(Player != null)
         {
-            Vector2 position = new Vector2(2.6f, Random.Range(-0.4f, 0.96f));
+            Vector2 position = new Vector2(2.3f, Random.Range(-0.4f, 0.96f));
             //Vector2 position = new Vector2(2.6f, Player.transform.position.y);
             GameObject bird = Instantiate(FlyingEnemy.gameObject, position, Quaternion.identity);
             float rnd = Random.Range(1.0f, 1.75f);
             bird.transform.localScale = new Vector3(rnd, rnd, rnd);
+            SpawnDifferentSizedCollectable(position + new Vector2(0.4f, 0), rnd);
         }
     }
 

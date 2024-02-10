@@ -14,7 +14,7 @@ public class Collectable : MonoBehaviour
 
     void FixedUpdate()
     {
-        rb.AddForce(Vector2.left * speed * Time.fixedDeltaTime);
+        rb.AddForce((Vector2.left + Vector2.down) * speed * Time.fixedDeltaTime);
     }
 
     private void Update()
@@ -29,7 +29,7 @@ public class Collectable : MonoBehaviour
     {
         if(collision.transform.tag == "Player")
         {
-            collision.gameObject.transform.GetComponent<PlayerMovement>().speed += 15;
+            collision.gameObject.transform.GetComponent<PlayerMovement>().speed += 10;
             Destroy(this.gameObject);
         }
     }
