@@ -29,7 +29,7 @@ public class Collectable : MonoBehaviour
     {
         if(collision.transform.tag == "Player")
         {
-            collision.gameObject.transform.GetComponent<PlayerMovement>().speed += 10;
+            collision.gameObject.transform.GetComponent<PlayerMovement>().Collected();
             Destroy(this.gameObject);
         }
     }

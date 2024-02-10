@@ -1,12 +1,15 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class PlayerMovement : MonoBehaviour
 {
     public float speed = 100;
     private Rigidbody2D rb;
     private Vector2 move;
+
+    private int NumCollectables = 0;
 
     // Start is called before the first frame update
     void Start()
@@ -43,5 +46,12 @@ public class PlayerMovement : MonoBehaviour
         {
             this.transform.position = new Vector2(this.transform.position.x, 0.95f);
         }
+    }
+
+    public void Collected()
+    {
+        this.speed += 7.5f;
+        NumCollectables += 1;
+        GameObject.Find("Score").GetComponent<Text>().text = NumCollectables.ToString();
     }
 }
