@@ -5,6 +5,7 @@ using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
+    public Camera cam;
     public Enemy FlyingEnemy;
     public Enemy GroundEnemy;
     public GameObject VersusLogo;
@@ -158,6 +159,7 @@ public class GameManager : MonoBehaviour
         Vector2 pos = new Vector2(2.6f, 0.17f);
         Instantiate(BossPrefab, pos, Quaternion.identity);
         VersusLogo.SetActive(true);
+        cam.gameObject.GetComponent<DramaticTilt>().Tilt();
     }
 
 }
