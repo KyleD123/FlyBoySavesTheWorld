@@ -31,9 +31,9 @@ public class PlayerMovement : MonoBehaviour
     void Update()
     {
         this.move = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
-        if (this.transform.position.x <= -2.07f)
+        if (this.transform.position.x <= -2.0f)
         {
-            this.transform.position = new Vector2(-2.06f, this.transform.position.y);
+            this.transform.position = new Vector2(-2f, this.transform.position.y);
         }
         else if(this.transform.position.x >= 2.07f)
         {

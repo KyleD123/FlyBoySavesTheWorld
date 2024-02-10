@@ -138,7 +138,7 @@ public class GameManager : MonoBehaviour
 
     public GameObject SpawnPlayer()
     {
-        Vector2 pos = new Vector2(-2f, 0.151f);
+        Vector2 pos = new Vector2(-1.7f, 0.151f);
         return Instantiate(PlayerPrefab, pos, Quaternion.identity);
     }
 
