@@ -10,23 +10,22 @@ public class Versus : MonoBehaviour
     void Start()
     {
         this.StartPos = this.transform.position;
-        StartCoroutine(DestroySelf());
+        StartCoroutine(TurnOffSelf());
     }
 
-    IEnumerator DestroySelf()
+    IEnumerator TurnOffSelf()
     {
         float timeElapsed = 0;
-        while(this.transform.position.x != EndPos.x)
+        while(Mathf.Abs(this.transform.position.x - EndPos.x) > 0.01f)
         {
-            //this.transform.Translate(Vector2.left * 5 * Time.deltaTime);
             if(timeElapsed < 1)
             {
                 timeElapsed += Time.deltaTime;
                 this.transform.position = Vector2.Lerp(StartPos, EndPos, timeElapsed / 1);
+                yield return null;
             }
-            yield return null;
         }
         yield return new WaitForSeconds(3);
-        Destroy(this.gameObject);
+        this.gameObject.SetActive(false);
     }
 }
