@@ -7,6 +7,7 @@ public class GameManager : MonoBehaviour
 {
     public Enemy FlyingEnemy;
     public Enemy GroundEnemy;
+    public GameObject VersusLogo;
     public GameObject PlayerPrefab;
     public GameObject BossPrefab;
     [HideInInspector]
@@ -147,6 +148,7 @@ public class GameManager : MonoBehaviour
         BossSpawned = true;
         Vector2 pos = new Vector2(2.6f, 0.17f);
         Instantiate(BossPrefab, pos, Quaternion.identity);
+        VersusLogo.SetActive(true);
     }
 
 }
